@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" action="/user/signup" method="POST" onsubmit="return validatePasswords()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="repeat-password">Repeat Password:</label>
+                <input type="password" id="repeat-password" name="repeat-password" required>
+            </div>
+            <div id="error-message" class="error-message" style="display: none; color: red;">Passwords do not match.</div>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    <script>
+        function validatePasswords() {
+            const password = document.getElementById("password").value;
+            const repeatPassword = document.getElementById("repeat-password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (password !== repeatPassword) {
+                errorMessage.style.display = "block";
+                return false;
+            } else {
+                errorMessage.style.display = "none";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "predeploy": "wrangler d1 migrations apply chat --remote",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
@@ -12,8 +13,13 @@
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.5.2",
     "@cloudflare/workers-types": "^4.20241112.0",
+    "@types/node": "^22.10.1",
     "typescript": "^5.5.2",
     "vitest": "2.0.5",
-    "wrangler": "^3.60.3"
+    "wrangler": "^3.93.0"
+  },
+  "dependencies": {
+    "fetch-event-stream": "^0.1.5",
+    "hono": "^4.6.12"
   }
 }

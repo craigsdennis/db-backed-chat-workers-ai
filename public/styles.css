@@ -1,0 +1,192 @@
+body {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 80vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.conversations-list-container {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    background-color: #2D2D2D;
+    padding: 10px;
+    box-sizing: border-box;
+    border-right: 1px solid #3D3D3D;
+}
+
+#new-conversation-button {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #005de0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#new-conversation-button:hover {
+    background-color: #0073ff;
+    color: #000000;
+}
+
+.conversations-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.conversation-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #3D3D3D;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.conversation-item:hover {
+    background-color: #4A4A4A;
+}
+
+.chat-container {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.chat-history {
+    flex-grow: 1;
+    background-color: #000000;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-message.user {
+    background-color: #001c43;
+    border: 1px solid #003681;
+    text-align: right;
+    color: #b9d6ff;
+}
+
+.chat-message.assistant {
+    background-color: #f6821f;
+    color: #000000;
+}
+
+.chat-input-container {
+    display: flex;
+    border-top: 1px solid #3D3D3D;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    outline: none;
+}
+
+#chat-input::placeholder {
+    color: #888;
+}
+
+#chat-input:focus {
+    border: 1px solid #005de0;
+}
+
+#send-button {
+    padding: 10px;
+    background-color: #005de0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #0073ff;
+}
+
+/* Styles for login and signup pages */
+.login-container, .signup-container {
+    background-color: #2D2D2D;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    width: 400px;
+    text-align: center;
+}
+
+.login-container h2, .signup-container h2 {
+    margin-bottom: 20px;
+    color: #FFFFFF;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+input[type="text"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 1px solid #005de0;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #005de0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0073ff;
+    color: #000000;
+}
+
+p a {
+    color: #f6821f;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
