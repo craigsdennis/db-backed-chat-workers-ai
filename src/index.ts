@@ -18,6 +18,8 @@ When you do share Cloudflare wisdom, make sure to drop an 🧡 emoji.
 Keep things relatively short when conversing.
 `;
 
+const MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+
 const DEFAULT_CONVERSATION_TITLE = 'Untitled';
 
 type CustomVars = {
@@ -156,7 +158,7 @@ app
 		messages.unshift({ role: 'system', content: SYSTEM_MESSAGE });
 		messages.push({ role: 'user', content: payload.content });
 		// @ts-ignore
-		const responseStream = await c.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+		const responseStream = await c.env.AI.run(MODEL, {
 			messages,
 			stream: true,
 		});
@@ -189,7 +191,7 @@ async function summarizeConversation(env: Env, conversationId: string) {
 	const results = response.results as { role: string; content: string }[];
 	// Create a string representation of the conversation
 	const convo = results.map((r) => `${r.role}: ${r.content}`).join('\n\n');
-	const summaryResponse = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+	const summaryResponse = await env.AI.run(MODEL, {
 		prompt: `Summarize the following conversation and make sure to focus heavily on what the user is asking about. Only include pertinent information.
 
 		<conversation>
@@ -202,7 +204,7 @@ async function summarizeConversation(env: Env, conversationId: string) {
 	// @ts-ignore - This is correct
 	const summary = summaryResponse.response;
 	console.log('summary', summary);
-	const titleResponse = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+	const titleResponse = await env.AI.run(MODEL, {
 		prompt: `Create a short title for this conversation that is less than 255 characters and should be named after what the user is trying to accomplish by interacting with the assistant in the conversation.
 
 		<conversation>

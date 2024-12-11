@@ -16,7 +16,7 @@
     "@types/node": "^22.10.1",
     "typescript": "^5.5.2",
     "vitest": "2.0.5",
-    "wrangler": "^3.93.0"
+    "wrangler": "^3.95.0"
   },
   "dependencies": {
     "fetch-event-stream": "^0.1.5",
