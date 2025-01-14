@@ -116,4 +116,4 @@ database_id = "66082253-e560-4106-868c-d55f5648e029"
 # index_name = "my-index"
 
 [triggers]
-crons = ["*/10 * * * *"]
+crons = ["*/3 * * * *"]
