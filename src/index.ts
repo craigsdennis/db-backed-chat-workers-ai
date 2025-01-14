@@ -4,9 +4,7 @@ import { setCookie, deleteCookie } from 'hono/cookie';
 import { jwt, sign } from 'hono/jwt';
 import type { JwtVariables } from 'hono/jwt';
 import { streamText } from 'hono/streaming';
-import { hashPassword, verifyPassword } from './hashword';
 import { HTTPException } from 'hono/http-exception';
-import { HTTPExceptionFunction } from 'hono/timeout';
 
 // TODO: You should change this!
 const SYSTEM_MESSAGE = `You are a friendly assistant who absolutely loves the Cloudflare Developer stack.
@@ -18,6 +16,7 @@ When you do share Cloudflare wisdom, make sure to drop an 🧡 emoji.
 Keep things relatively short when conversing.
 `;
 
+// Feel free to use any Text Generation model at https://developers.cloudflare.com/workers-ai/models/
 const MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
 const DEFAULT_CONVERSATION_TITLE = 'Untitled';
@@ -50,10 +49,10 @@ async function authenticateSession(c: Context<CustomContext>, userId: string) {
 app.post('/user/signup', async (c) => {
 	const body = await c.req.parseBody();
 	const userId = crypto.randomUUID();
-	const hashword = await hashPassword(body.password as string);
+	const password = "You should not store passwords in plain text";
 	// Insert user
 	const response = await c.env.DB.prepare(`INSERT INTO users (id, username, password) VALUES (?, ?, ?)`)
-		.bind(userId, body.username, hashword)
+		.bind(userId, body.username, password)
 		.all();
 	await authenticateSession(c, userId);
 	return c.redirect('/');
@@ -72,7 +71,8 @@ app.post('/user/login', async (c) => {
 		throw new HTTPException(401, { res: errorResponse });
 
 	}
-	const verified = await verifyPassword(body.password as string, results[0].password as string);
+	// TODO: Find an auth solution
+	const verified = body.password === "12345";
 	if (!verified) {
 		const errorResponse = new Response('Unauthorized', {
 			status: 401,
@@ -101,12 +101,6 @@ app.use('/api/*', async (c, next) => {
 	return jwtMiddleware(c, next);
 });
 
-app.use('*', async (c, next) => {
-	const jwtPayload = c.get('jwtPayload');
-	c.set('userId', jwtPayload.sub);
-	await next();
-});
-
 app.onError(async (err, c) => {
 	console.error(err);
 	if (err instanceof HTTPException) {
@@ -116,6 +110,14 @@ app.onError(async (err, c) => {
 		}
 	}
 	return new Response(err.message);
+});
+
+
+app.use('*', async (c, next) => {
+	const jwtPayload = c.get('jwtPayload');
+	// Adds the user to every request
+	c.set('userId', jwtPayload.sub);
+	await next();
 });
 
 app.get('/api/conversations', async (c) => {
