@@ -1,6 +1,6 @@
 # Database Backed Workers AI Chat
 
-Users can sign up and begin chatting with an AI model hosted on [Workers AI](https://developers.cloudflare.com/workers-ai/). Conversations and messages are stored in [D1](https://developers.cloudflare.com/d1/). Conversations are automatically titled and summarized using a [Cron trigger](https://developers.cloudflare.com/workers/configuration/cron-triggers/) and AI.
+Users can sign up and begin chatting with an AI model hosted on [Workers AI](https://developers.cloudflare.com/workers-ai/). Conversations and messages are stored in [D1](https://developers.cloudflare.com/d1/). Conversations are automatically titled and summarized every 3 minutes using a [Cron trigger](https://developers.cloudflare.com/workers/configuration/cron-triggers/) and AI.
 
 NOTE: Authentication is not in place in this demo, the password is always `12345`. However, it does use JSON Web Tokens (JWT) via the [Hono](https://honojs.dev) web framework.
 
