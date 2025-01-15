@@ -1,8 +1,10 @@
 # Database Backed Workers AI Chat
 
-This is an example AI chat application that makes use of the [D1](https://developers.cloudflare.com/d1/) database to store conversations. It uses [Workers AI](https://developers.cloudflare.com/workers-ai/) for the hosting provider.
+Users can sign up and begin chatting with an AI model hosted on [Workers AI](https://developers.cloudflare.com/workers-ai/). Conversations and messages are stored in [D1](https://developers.cloudflare.com/d1/). Conversations are automatically titled and summarized using a [Cron trigger](https://developers.cloudflare.com/workers/configuration/cron-triggers/) and AI.
 
-Users authenticate and then are given a JWT via the [Hono](https://honojs.dev) framework.
+NOTE: Authentication is not in place in this demo, the password is always `12345`. However, it does use JSON Web Tokens (JWT) via the [Hono](https://honojs.dev) web framework.
+
+Users => Conversations => Messages
 
 ## Setup
 
